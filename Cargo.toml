@@ -1,7 +1,6 @@
 [workspace]
 members = [
     "jupiter-swap-api-client",
-    "example",
 ]
 resolver = "2"
 
@@ -9,6 +8,14 @@ resolver = "2"
 edition = "2021"
 
 [workspace.dependencies]
-solana-sdk = "3"
-solana-client = "3"
-solana-account-decoder = "3"
+anyhow = "1"
+base64 = "0.22.1"
+reqwest = { version = "0.12", features = ["json"] }
+rust_decimal = "1.36.0"
+serde = { version = "1.0.159", features = ["derive"] }
+serde_json = "1.0.95"
+serde_qs = "0.13.0"
+solana-account-decoder-client-types = { version = "4", features = ["agave-unstable-api"] }
+solana-instruction = "3"
+solana-pubkey = "4"
+thiserror = "2"
