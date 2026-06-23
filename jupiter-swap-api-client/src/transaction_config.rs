@@ -1,7 +1,7 @@
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_json::Value;
 use solana_account_decoder_client_types::UiAccount;
-use solana_pubkey::Pubkey;
+use solana_address::Address;
 
 use crate::serde_helpers::option_field_as_string;
 
@@ -145,13 +145,13 @@ pub struct TransactionConfig {
     pub allow_optimized_wrapped_sol_token_account: bool,
     /// Fee token account for the output token, it is derived using the seeds = ["referral_ata", referral_account, mint] and the `REFER4ZgmyYx9c6He5XfaTMiGfdLwRnkV4RPp9t9iF3` referral contract (only pass in if you set a feeBps and make sure that the feeAccount has been created)
     #[serde(with = "option_field_as_string")]
-    pub fee_account: Option<Pubkey>,
+    pub fee_account: Option<Address>,
     /// Public key of the token account that will be used to receive the token out of the swap. If not provided, the user's ATA will be used. If provided, we assume that the token account is already initialized.
     #[serde(with = "option_field_as_string")]
-    pub destination_token_account: Option<Pubkey>,
+    pub destination_token_account: Option<Address>,
     /// Add a readonly, non signer tracking account that isn't used by jupiter
     #[serde(with = "option_field_as_string")]
-    pub tracking_account: Option<Pubkey>,
+    pub tracking_account: Option<Address>,
     /// compute unit price to prioritize the transaction, the additional fee will be compute unit consumed * computeUnitPriceMicroLamports
     pub compute_unit_price_micro_lamports: Option<ComputeUnitPriceMicroLamports>,
     /// Prioritization fee lamports paid for the transaction in addition to the signatures fee.

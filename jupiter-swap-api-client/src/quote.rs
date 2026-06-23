@@ -8,19 +8,19 @@ use crate::serde_helpers::field_as_string;
 use anyhow::{anyhow, Error};
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
-use solana_pubkey::Pubkey;
+use solana_address::Address;
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 /// Swap information of each Swap occurred in the route paths
 pub struct SwapInfo {
     #[serde(with = "field_as_string")]
-    pub amm_key: Pubkey,
+    pub amm_key: Address,
     pub label: String,
     #[serde(with = "field_as_string")]
-    pub input_mint: Pubkey,
+    pub input_mint: Address,
     #[serde(with = "field_as_string")]
-    pub output_mint: Pubkey,
+    pub output_mint: Address,
     /// An estimation of the input amount into the AMM
     #[serde(with = "field_as_string")]
     pub in_amount: u64,
@@ -30,7 +30,7 @@ pub struct SwapInfo {
     #[serde(with = "field_as_string")]
     pub fee_amount: u64,
     #[serde(with = "field_as_string")]
-    pub fee_mint: Pubkey,
+    pub fee_mint: Address,
 }
 
 #[derive(Serialize, Deserialize, Default, PartialEq, Clone, Debug)]
@@ -61,9 +61,9 @@ pub struct ComputeUnitScore {
 #[serde(rename_all = "camelCase")]
 pub struct QuoteRequest {
     #[serde(with = "field_as_string")]
-    pub input_mint: Pubkey,
+    pub input_mint: Address,
     #[serde(with = "field_as_string")]
-    pub output_mint: Pubkey,
+    pub output_mint: Address,
     /// The amount to swap, have to factor in the token decimals.
     #[serde(with = "field_as_string")]
     pub amount: u64,
@@ -119,9 +119,9 @@ pub struct QuoteRequest {
 #[serde(rename_all = "camelCase")]
 pub struct InternalQuoteRequest {
     #[serde(with = "field_as_string")]
-    pub input_mint: Pubkey,
+    pub input_mint: Address,
     #[serde(with = "field_as_string")]
-    pub output_mint: Pubkey,
+    pub output_mint: Address,
     /// The amount to swap, have to factor in the token decimals.
     #[serde(with = "field_as_string")]
     pub amount: u64,
@@ -204,11 +204,11 @@ pub struct PlatformFee {
 #[serde(rename_all = "camelCase")]
 pub struct QuoteResponse {
     #[serde(with = "field_as_string")]
-    pub input_mint: Pubkey,
+    pub input_mint: Address,
     #[serde(with = "field_as_string")]
     pub in_amount: u64,
     #[serde(with = "field_as_string")]
-    pub output_mint: Pubkey,
+    pub output_mint: Address,
     #[serde(with = "field_as_string")]
     pub out_amount: u64,
     /// Not used by build transaction

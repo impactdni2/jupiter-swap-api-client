@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use solana_pubkey::Pubkey;
+use solana_address::Address;
 
 use crate::serde_helpers::field_as_string;
 
@@ -17,12 +17,12 @@ pub struct RoutePlanStep {
 #[serde(rename_all = "camelCase")]
 pub struct SwapInfo {
     #[serde(with = "field_as_string")]
-    pub amm_key: Pubkey,
+    pub amm_key: Address,
     pub label: String,
     #[serde(with = "field_as_string")]
-    pub input_mint: Pubkey,
+    pub input_mint: Address,
     #[serde(with = "field_as_string")]
-    pub output_mint: Pubkey,
+    pub output_mint: Address,
     /// An estimation of the input amount into the AMM
     #[serde(with = "field_as_string")]
     pub in_amount: u64,
@@ -32,5 +32,5 @@ pub struct SwapInfo {
     #[serde(with = "field_as_string")]
     pub fee_amount: u64,
     #[serde(with = "field_as_string")]
-    pub fee_mint: Pubkey,
+    pub fee_mint: Address,
 }

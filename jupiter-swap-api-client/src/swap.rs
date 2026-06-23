@@ -3,14 +3,14 @@ use crate::{
 };
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
+use solana_address::Address;
 use solana_instruction::{AccountMeta, Instruction};
-use solana_pubkey::Pubkey;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct SwapRequest {
     #[serde(with = "field_as_string")]
-    pub user_public_key: Pubkey,
+    pub user_public_key: Address,
     pub quote_response: QuoteResponse,
     #[serde(flatten)]
     pub config: TransactionConfig,
@@ -90,7 +90,7 @@ pub struct SwapInstructionsResponse {
     /// Other instructions that should be included in the transaction.
     /// Now, it should only have the Jito tip instruction.
     pub other_instructions: Vec<Instruction>,
-    pub address_lookup_table_addresses: Vec<Pubkey>,
+    pub address_lookup_table_addresses: Vec<Address>,
     pub prioritization_fee_lamports: u64,
     pub compute_unit_limit: u32,
     pub prioritization_type: Option<PrioritizationType>,
@@ -111,7 +111,7 @@ pub struct SwapInstructionsResponseInternal {
     /// Other instructions that should be included in the transaction.
     /// Now, it should only have the Jito tip instruction.
     other_instructions: Vec<InstructionInternal>,
-    address_lookup_table_addresses: Vec<PubkeyInternal>,
+    address_lookup_table_addresses: Vec<AddressInternal>,
     prioritization_fee_lamports: u64,
     compute_unit_limit: u32,
     prioritization_type: Option<PrioritizationType>,
@@ -123,7 +123,7 @@ pub struct SwapInstructionsResponseInternal {
 #[serde(rename_all = "camelCase")]
 struct InstructionInternal {
     #[serde(with = "field_as_string")]
-    pub program_id: Pubkey,
+    pub program_id: Address,
     pub accounts: Vec<AccountMetaInternal>,
     #[serde(with = "base64_serialize_deserialize")]
     pub data: Vec<u8>,
@@ -133,7 +133,7 @@ struct InstructionInternal {
 #[serde(rename_all = "camelCase")]
 pub struct AccountMetaInternal {
     #[serde(with = "field_as_string")]
-    pub pubkey: Pubkey,
+    pub pubkey: Address,
     pub is_signer: bool,
     pub is_writable: bool,
 }
@@ -150,7 +150,7 @@ impl From<AccountMetaInternal> for AccountMeta {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
-struct PubkeyInternal(#[serde(with = "field_as_string")] Pubkey);
+struct AddressInternal(#[serde(with = "field_as_string")] Address);
 
 impl From<InstructionInternal> for Instruction {
     fn from(val: InstructionInternal) -> Self {

@@ -24,11 +24,11 @@ use jupiter_swap_api_client::{
     quote::QuoteRequest, swap::SwapRequest, transaction_config::TransactionConfig,
     JupiterSwapApiClient,
 };
-use solana_pubkey::{pubkey, Pubkey};
+use solana_address::{address, Address};
 
-const USDC_MINT: Pubkey = pubkey!("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
-const NATIVE_MINT: Pubkey = pubkey!("So11111111111111111111111111111111111111112");
-const TEST_WALLET: Pubkey = pubkey!("2AQdpHJ2JpcEgPiATUXjQxA8QmafFegfQwSLWSprPicm");
+const USDC_MINT: Address = address!("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+const NATIVE_MINT: Address = address!("So11111111111111111111111111111111111111112");
+const TEST_WALLET: Address = address!("2AQdpHJ2JpcEgPiATUXjQxA8QmafFegfQwSLWSprPicm");
 
 #[tokio::main]
 async fn main() {
